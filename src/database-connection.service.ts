@@ -17,6 +17,7 @@ export class DataBaseConnectionService implements TypeOrmOptionsFactory {
       dropSchema: false,
       logging: true,
       entities: ["dist/**/*.entity{.ts,.js}"],
+      multipleStatements: true
     }
   }
 

@@ -5,18 +5,20 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataBaseConnectionService } from './database-connection.service';
 import { AuthModule } from './auth/auth.module';
 import { Connection } from 'typeorm';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    // Database connection
 
     TypeOrmModule.forRootAsync({
       useClass: DataBaseConnectionService
     }),
 
-    AuthModule,
 
-    UsersModule
+    //Individual Module loaded
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

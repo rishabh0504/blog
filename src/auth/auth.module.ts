@@ -9,15 +9,20 @@ import 'dotenv/config';
 import { JWTStrategy } from './jwt.strategy';
 @Module({
   imports: [
+    // Database entity mapper module
     TypeOrmModule.forFeature([
       UserEntity
     ]),
+
+    // JWT module
     JwtModule.register({
       secret: process.env.APP_SECRET,
       signOptions: {
         expiresIn: 3600
       }
     }),
+
+    // Passport module
     PassportModule.register({
       defaultStrategy: 'jwt'
     })

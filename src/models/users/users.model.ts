@@ -23,6 +23,9 @@ export class RegisterDTO extends LoginDTO {
 
 export interface AuthPayload {
   username: string;
-  
 }
 
+export class UserDTO {
+  @IsString()
+  bio: string;
+}
