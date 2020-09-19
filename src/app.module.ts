@@ -6,6 +6,7 @@ import { DataBaseConnectionService } from './database-connection.service';
 import { AuthModule } from './auth/auth.module';
 import { Connection } from 'typeorm';
 import { UserModule } from './user/user.module';
+import { ArticleModule } from './article/article.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { UserModule } from './user/user.module';
     //Individual Module loaded
     AuthModule,
     UserModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

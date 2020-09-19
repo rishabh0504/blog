@@ -8,12 +8,13 @@ import { ProfileDTO, UserDTO } from 'src/models/users/users.model';
 export class UserService {
 
 
+
   constructor(
     @InjectRepository(UserEntity) private userRepo: Repository<UserEntity>
   ) { }
 
   async findByUsername(username: string): Promise<UserEntity> {
-    return  this.userRepo.findOne({ where: { username } })
+    return this.userRepo.findOne({ where: { username } })
   }
 
   async updateUserByUsername(username: string, data: UserDTO): Promise<UserEntity> {
@@ -22,7 +23,22 @@ export class UserService {
   }
 
   async getProfile(username: string): Promise<UserEntity> {
-    return  this.findByUsername(username);
+    return this.findByUsername(username);
+  }
+  async unfollowUser(activeUser: UserEntity, username: string) {
+    const user = await this.userRepo.findOne({ where: { username }, relations: ['followers'] })
+    //user.followers.push(activeUser);
+    user.followers = user.followers.filter((follower) => {
+      return follower !== activeUser;
+    })
+    await user.save();
+    return user.toProfile(activeUser)
+  }
+  async followUser(activeUser: UserEntity, username: string) {
+    const user = await this.userRepo.findOne({ where: { username }, relations: ['followers'] })
+    user.followers.push(activeUser);
+    await user.save();
+    return user.toProfile(activeUser)
   }
 
 }
