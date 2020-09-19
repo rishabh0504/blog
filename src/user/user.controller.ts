@@ -13,13 +13,13 @@ export class UserController {
   ) { }
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard())
   findLoggedinUser(@User() { username }: UserEntity) {
     return this.userService.findByUsername(username);
   }
 
   @Put()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard())
   updateUserByUserName(@User() { username }: UserEntity, @Body(ValidationPipe) userData: UserDTO) {
     return this.userService.updateUserByUsername(username, userData);
   }

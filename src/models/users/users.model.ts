@@ -29,3 +29,8 @@ export class UserDTO {
   @IsString()
   bio: string;
 }
+
+export class ProfileDTO {
+  @IsString()
+  username: string;
+}
